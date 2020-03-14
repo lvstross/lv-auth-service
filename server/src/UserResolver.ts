@@ -1,10 +1,11 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware, Int } from 'type-graphql';
 import { hash, compare } from 'bcryptjs';
 import { User } from './entity/User';
 import { Context } from './Context';
 import { createRefreshToken, createAccessToken } from './auth';
 import { isAuth } from './isAuthMiddleware';
 import { sendRefreshToken } from './sendRefreshToken';
+import { getConnection } from 'typeorm';
 
 @ObjectType()
 class LoginResponse {
@@ -29,6 +30,17 @@ export class UserResolver {
   @Query(() => [User])
   users() {
     return User.find();
+  }
+
+  // Remove this later and use logic in forgot password endpoint
+  @Mutation(() => Boolean)
+  async revokeRefreshTokensForUser(
+    @Arg('userId', () => Int) userId: number
+  ) {
+    await getConnection()
+      .getRepository(User)
+      .increment({ id: userId }, 'tokenVersion', 1);
+    return true;
   }
 
   @Mutation(() => LoginResponse)
