@@ -1,4 +1,6 @@
-# Awesome Project Build with TypeORM
+# Auth Service JWT Typescript Project
+
+## Awesome Project Build with TypeORM
 
 Steps to run this project:
 
