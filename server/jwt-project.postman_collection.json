@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "df6f86bb-bbe2-4dad-94ea-cb7b562e33e8",
+		"name": "Personal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:4000/refresh_token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/refresh_token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"refresh_token"
+					]
+				},
+				"description": "JWT project"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
