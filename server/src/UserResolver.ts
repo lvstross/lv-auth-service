@@ -4,6 +4,7 @@ import { User } from './entity/User';
 import { Context } from './Context';
 import { createRefreshToken, createAccessToken } from './auth';
 import { isAuth } from './isAuthMiddleware';
+import { sendRefreshToken } from './sendRefreshToken';
 
 @ObjectType()
 class LoginResponse {
@@ -48,13 +49,7 @@ export class UserResolver {
       throw new Error('Your credetials do not match');
     }
 
-    res.cookie(
-      'lvjwt',
-      createRefreshToken(user),
-      {
-        httpOnly: true
-      }
-    );
+    sendRefreshToken(res, createRefreshToken(user));
 
     return {
       accessToken: createAccessToken(user)
